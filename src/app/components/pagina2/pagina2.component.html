@@ -1,0 +1,84 @@
+<h2> SIGN UP</h2>
+<div class="container">
+
+    <form [formGroup]="miFormulario">
+      <!-- USUARIO -->
+      Usuario: 
+      <input 
+      [class.is-invalid]="miFormulario.get('username')?.touched 
+      && miFormulario.get('username')?.invalid" 
+      type="text" class="form-control" 
+      formControlName="username">
+
+      <div
+      *ngIf="miFormulario.get('username')?.touched 
+      && miFormulario.get('username')?.invalid">
+        <div class="msgError"> El usuario debe contener al menos 3 caracteres</div>
+      </div>
+  
+      <!-- EMAIL -->
+
+      Email: 
+      <input 
+      [class.is-invalid]="miFormulario.get('email')?.touched 
+      && miFormulario.get('email')?.invalid" 
+      type="text" class="form-control" 
+      formControlName="email">
+
+      <div
+      *ngIf="miFormulario.get('email')?.touched 
+      && miFormulario.get('email')?.invalid">
+        <div class="msgError"> Por favor inserte un correo válido </div>
+      </div>
+
+      <!-- PASSWORD -->
+  
+      Password: 
+      <input 
+      [class.is-invalid]="miFormulario.get('password')?.touched 
+      && miFormulario.get('password')?.invalid"
+      type="password" 
+      class="form-control"
+      pattern="(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$"  
+      formControlName="password">
+      
+      <div
+      *ngIf="miFormulario.get('password')?.touched 
+      && miFormulario.get('password')?.invalid">
+        <div class="msgError"> La contraseña debe incluir al menos 10 caracteres, usar al menos una mayúscula, una minúscula y un caracter especial</div>
+      </div>
+
+      <!-- FECHA NACIMIENTO -->
+
+      Fecha nacimiento: 
+      <input 
+      [class.is-invalid]="miFormulario.get('birthday')?.touched 
+      && miFormulario.get('birthday')?.invalid"
+      type="date" 
+      class="form-control"
+      formControlName="birthday">
+
+      <div
+      *ngIf="miFormulario.get('birthday')?.touched 
+      && miFormulario.get('birthday')?.invalid">
+        <div class="msgError"> Por favor inserte una edad válida</div>
+      </div>
+
+
+      <!-- BOTÓN -->
+      
+      <br>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit" (click)="store()"> Enviar </button>
+      </div>
+    </form>
+
+    <br>
+    <div class="alert alert-success" role="alert" *ngIf="creadoSucces"> ¡Usuario creado correctamente! </div>
+    <div class="alert alert-danger" role="alert" *ngIf="creadoDanger"> Error al crear usuario </div>
+
+    <br>
+    <!--
+    {{ miFormulario.value | json}}
+    -->
+  </div>
